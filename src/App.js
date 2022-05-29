@@ -24,7 +24,7 @@ function App() {
     <>
       <Header data={headerData} />
       <div className='catalog'>
-        {products.map(item => <Product title={item.title} price={item.price} image={item.image} />)}
+        {products.map(item => <Product key={item.title} title={item.title} price={item.price} image={item.image} />)}
       </div>
       <Form />
       <Footer />
