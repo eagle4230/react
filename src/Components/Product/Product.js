@@ -1,6 +1,6 @@
 import './Product.css'
 
-function Product(props) {
+export const Product = (props) => {
     return (
         <div className="product-card">
             <h3>{props.title}</h3>
@@ -9,5 +9,3 @@ function Product(props) {
         </div>
     )
 }
-
-export default Product;

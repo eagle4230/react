@@ -1,4 +1,6 @@
-function Header(props) {
+import { Nav } from "../Nav/Nav";
+
+export const Header = (props) => {
     return (
         <header>
             <h1>{props.data.sitename}</h1>
@@ -9,17 +11,3 @@ function Header(props) {
     );
 }
 
-function Nav(props) {
-    let data = props.nav;
-    const listItem = data.map(item =>
-        <li key={item.link}><a href={item.link}>{item.text}</a></li>
-    );
-    return (
-        <nav>
-            <ul>
-                {listItem}
-            </ul>
-        </nav>
-    );
-}
-export default Header;

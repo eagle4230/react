@@ -1,12 +1,12 @@
 import './App.css';
-import Header from './Components/Header/Header';
-import Footer from './Components/Footer/Footer';
-import Product from './Components/Product/Product';
+import { Header } from './Components/Header/Header';
+import { Footer } from './Components/Footer/Footer';
+import { Product } from './Components/Product/Product';
 import { Form } from './Components/Message/Message';
 
 const headerData = {
-  sitename: 'Заголовок сайта 2',
-  title: 'Подзаголовок 2',
+  sitename: 'Заголовок сайта',
+  title: 'Подзаголовок',
   nav: [
     { "link": "nav1", "text": "my link 1" },
     { "link": "nav2", "text": "my link 2" },
@@ -19,7 +19,7 @@ const products = [
   { "title": "pear", "price": 420, "image": "https://cdn0.iconfinder.com/data/icons/fruity-3/512/Pear-512.png" }
 ];
 
-function App() {
+export const App = () => {
   return (
     <>
       <Header data={headerData} />
@@ -31,5 +31,3 @@ function App() {
     </>
   );
 }
-
-export default App;

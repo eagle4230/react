@@ -1,14 +1,16 @@
 import React from "react";
 
-class Footer extends React.Component {
+export class Footer extends React.Component {
+    state = {
+        name: 'Footer',
+    };
+
     render() {
         return (
             <>
                 <hr />
-                <h2>Заголовок Footer</h2>
+                <h2>Заголовок {this.state.name}</h2>
             </>
         )
     };
 }
-
-export default Footer;

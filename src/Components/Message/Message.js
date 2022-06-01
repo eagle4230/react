@@ -15,10 +15,12 @@ export const Form = () => {
     return (
         <>
             <hr />
-            <p>Hello, React {count}</p>
-            <button onClick={handleClick}>click</button>
-            <p>Name: {name}</p>
-            <input type="text" onChange={handleChange} value={name} />
+            <div style={{ marginLeft: '60px' }}>
+                <p style={{ color: 'red' }}>Hello, React {count}</p>
+                <button onClick={handleClick}>click</button>
+                <p>Name: {name}</p>
+                <input type="text" onChange={handleChange} value={name} />
+            </div>
         </>
     );
 }
