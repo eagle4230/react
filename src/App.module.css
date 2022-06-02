@@ -1,0 +1,7 @@
+.flud {
+    border: 1px solid #d3d3d3;
+    max-width: 60vh;
+    min-width: 40vh;
+    margin: 0 auto;
+    background-color: antiquewhite;
+}
