@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { AUTHOR } from "../data";
+import { AUTHOR } from "../../data";
 import style from './Form.module.css';
+import { Button } from "./components/Button/Button";
 
 export const Form = ({ addMessage }) => {
     const [text, setText] = useState('');
@@ -22,7 +23,7 @@ export const Form = ({ addMessage }) => {
                 onChange={(e) => setText(e.target.value)}
                 placeholder="  Your message..."
             />
-            <button className={style.button}>Send</button>
+            <Button label="SEND" />
         </form>
     )
 }
