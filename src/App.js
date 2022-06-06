@@ -1,33 +1,42 @@
-import './App.css';
-import { Header } from './Components/Header/Header';
-import { Footer } from './Components/Footer/Footer';
-import { Product } from './Components/Product/Product';
-import { Form } from './Components/Message/Message';
+import { useEffect, useState } from 'react';
+import { Form } from './Components/Form';
+import { MessageList } from './Components/MessagesList';
+import { AUTHOR } from './data';
+import style from './App.module.css'
 
-const headerData = {
-  sitename: 'Заголовок сайта',
-  title: 'Подзаголовок',
-  nav: [
-    { "link": "nav1", "text": "my link 1" },
-    { "link": "nav2", "text": "my link 2" },
-    { "link": "nav3", "text": "my link 3" }
-  ]
-};
-
-const products = [
-  { "title": "apple", "price": 330, "image": "https://cdn0.iconfinder.com/data/icons/fruity-3/512/Apple-512.png" },
-  { "title": "pear", "price": 420, "image": "https://cdn0.iconfinder.com/data/icons/fruity-3/512/Pear-512.png" }
+const startMessages = [
+  {
+    author: AUTHOR.user,
+    text: 'Hello!'
+  },
 ];
 
 export const App = () => {
+  const [messages, setMessages] = useState(startMessages);
+
+  const addMessage = (newMessage) => {
+    setMessages([...messages, newMessage]);
+  }
+
+  useEffect(() => {
+    if (messages[messages.length - 1].author === AUTHOR.user) {
+      const timeout = setTimeout(() => {
+        addMessage({
+          author: AUTHOR.bot,
+          text: 'Hello Artem!',
+        });
+      }, 1500);
+
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  });
+
   return (
-    <>
-      <Header data={headerData} />
-      <div className='catalog'>
-        {products.map(item => <Product key={item.title} title={item.title} price={item.price} image={item.image} />)}
-      </div>
-      <Form />
-      <Footer />
-    </>
+    <div className={style.flud}>
+      <MessageList messages={messages} />
+      <Form addMessage={addMessage} />
+    </div>
   );
 }
