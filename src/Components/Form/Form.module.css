@@ -11,12 +11,6 @@
     background-color: aqua;
     border-radius: 15px;
     flex-grow: 1;
-}
-
-.button {
-    background-color: #fafafa;
-    color: blue;
-    margin-left: 18px;
-    border-radius: 10px;
     border: none;
+    padding-left: 8px;
 }

@@ -4,10 +4,10 @@
   "private": true,
   "homepage": "https://eagle4230.github.io/react/",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
+    "@babel/preset-env": "^7.18.2",
     "@testing-library/user-event": "^13.5.0",
     "gh-pages": "^4.0.0",
+    "identity-obj-proxy": "^3.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
@@ -16,10 +16,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy:web": "npm run build && gh-pages -d build",
+    "deploy:coverage": "npm run test:coverage && gh-pages -d coverage/lcov-report",
+    "test:coverage": "jest --coverage --colors"
   },
   "eslintConfig": {
     "extends": [
@@ -38,5 +40,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.17.12",
+    "@babel/preset-react": "^7.17.12",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "babel-jest": "^28.1.0",
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0"
   }
 }

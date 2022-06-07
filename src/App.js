@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form } from './Components/Form';
+import { Form } from './Components/Form/Form';
 import { MessageList } from './Components/MessagesList';
 import { AUTHOR } from './data';
 import style from './App.module.css'
