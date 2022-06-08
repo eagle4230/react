@@ -1,0 +1,7 @@
+.input {
+    background-color: aqua;
+    border-radius: 15px;
+    flex-grow: 1;
+    border: none;
+    padding-left: 8px;
+}
