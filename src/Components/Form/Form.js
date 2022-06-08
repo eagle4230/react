@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { AUTHOR } from "../../data";
 import style from './Form.module.css';
-import { Button } from "./components/Button/Button";
+import { Button } from "./components/Button";
+import { Input } from "./components/Input";
 
 export const Form = ({ addMessage }) => {
     const [text, setText] = useState('');
@@ -17,12 +18,7 @@ export const Form = ({ addMessage }) => {
 
     return (
         <form onSubmit={handleSubmit} className={style.form}>
-            <input className={style.input}
-                type="text"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="  Your message..."
-            />
+            <Input text={text} setText={setText} onChange={(e) => setText(e.target.value)} />
             <Button label="SEND" />
         </form>
     )
