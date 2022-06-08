@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { Form } from './Components/Form';
 import { MessageList } from './Components/MessagesList';
 import { AUTHOR } from './data';
-import style from './App.module.css'
+import style from './App.module.css';
 
 const startMessages = [
   {
     author: AUTHOR.user,
-    text: 'Hello!'
+    text: 'Hello!',
   },
 ];
 
@@ -16,7 +16,7 @@ export const App = () => {
 
   const addMessage = (newMessage) => {
     setMessages([...messages, newMessage]);
-  }
+  };
 
   useEffect(() => {
     if (messages[messages.length - 1].author === AUTHOR.user) {
@@ -39,4 +39,4 @@ export const App = () => {
       <Form addMessage={addMessage} />
     </div>
   );
-}
+};
