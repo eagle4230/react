@@ -23,7 +23,8 @@
     "deploy:coverage": "npm run test:coverage && gh-pages -d coverage/lcov-report",
     "test:coverage": "jest --coverage --colors",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -78,6 +79,7 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-storybook": "^0.5.12",
+    "husky": "^8.0.1",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",
     "prop-types": "^15.8.1",
