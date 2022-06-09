@@ -4,7 +4,7 @@ import './Button.css';
 
 export const Button = ({ label }) => {
   return (
-    <Fab className="button" variant="contained" type="submit">
+    <Fab className="button" variant="contained" type="submit" size="small">
       {label}
     </Fab>
   );
