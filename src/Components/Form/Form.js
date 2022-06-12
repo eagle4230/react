@@ -4,8 +4,8 @@ import { AUTHOR } from '../../data';
 import style from './Form.module.css';
 import { Button } from './components/Button';
 import { Input } from './components/Input';
-import { useRef } from 'react';
 import { useEffect } from 'react';
+import { useRef } from 'react';
 
 export const Form = ({ addMessage }) => {
   const [text, setText] = useState('');
@@ -14,7 +14,7 @@ export const Form = ({ addMessage }) => {
 
   useEffect(() => {
     if (addMessage.autofocus) {
-      inputRef.current.focus();
+      inputRef.current.autofocus;
     }
   }, [addMessage.autofocus, inputRef]);
 
