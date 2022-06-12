@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from './Components/Form';
 import { MessageList } from './Components/MessagesList';
 import { AUTHOR } from './data';
@@ -31,7 +31,8 @@ export const App = () => {
         clearTimeout(timeout);
       };
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages]);
 
   return (
     <div className={style.flud}>
