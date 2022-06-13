@@ -1,8 +1,10 @@
+import { ListItem } from '@mui/material';
+import { nanoid } from 'nanoid';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-export const ChatList = () => {
+export const ChatList = ({ chats, onAddChat }) => {
   const [value, setValue] = useState('');
-  const [list, setList] = useState([]);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -10,20 +12,31 @@ export const ChatList = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setList([
-      ...list,
-      {
-        id: 1,
-        name: value,
-      },
-    ]);
-    setValue('');
+
+    if (value) {
+      onAddChat(
+        {
+          id: nanoid(),
+          name: value,
+        },
+      );
+      setValue('');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={value} onChange={handleChange} />
-      <button>Create Chat</button>
-    </form>
+    <>
+      <ul>
+        {chats.map((chat) => (
+          <ListItem key={chat.id}>
+            <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
+          </ListItem>
+        ))}
+      </ul>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={value} onChange={handleChange} />
+        <button>Create Chat</button>
+      </form>
+    </>
   );
 };

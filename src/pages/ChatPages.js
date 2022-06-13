@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Form } from './Components/Form';
-import { MessageList } from './Components/MessagesList';
-import { AUTHOR } from './data';
-import style from './App.module.css';
+import { Form } from '../Components/Form';
+import { MessageList } from '../Components/MessagesList';
+import { AUTHOR } from '../data';
+import style from '../App.module.css';
+import { ChatList } from '../Components/ChatList/ChatList';
 
 const startMessages = [
   {
@@ -11,7 +12,7 @@ const startMessages = [
   },
 ];
 
-export const App = () => {
+export const ChatPage = ({ chats, onAddChat }) => {
   const [messages, setMessages] = useState(startMessages);
 
   const addMessage = (newMessage) => {
@@ -35,9 +36,12 @@ export const App = () => {
   }, [messages]);
 
   return (
-    <div className={style.flud}>
-      <MessageList messages={messages} />
-      <Form addMessage={addMessage} />
-    </div>
+    <>
+      <ChatList chats={chats} onAddChat={onAddChat} />
+      <div className={style.flud}>
+        <MessageList messages={messages} />
+        <Form addMessage={addMessage} />
+      </div>
+    </>
   );
 };
