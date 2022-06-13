@@ -14,12 +14,10 @@ export const ChatList = ({ chats, onAddChat }) => {
     e.preventDefault();
 
     if (value) {
-      onAddChat(
-        {
-          id: nanoid(),
-          name: value,
-        },
-      );
+      onAddChat({
+        id: nanoid(),
+        name: value,
+      });
       setValue('');
     }
   };
