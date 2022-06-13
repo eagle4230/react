@@ -1,43 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Form } from './Components/Form';
-import { MessageList } from './Components/MessagesList';
-import { AUTHOR } from './data';
-import style from './App.module.css';
-
-const startMessages = [
-  {
-    author: AUTHOR.user,
-    text: 'Hello!',
-  },
-];
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ChatList } from './Components/ChatList/ChatList';
+import { Main } from './pages/Main';
+import { Profile } from './pages/Profile';
 
 export const App = () => {
-  const [messages, setMessages] = useState(startMessages);
-
-  const addMessage = (newMessage) => {
-    setMessages([...messages, newMessage]);
-  };
-
-  useEffect(() => {
-    if (messages[messages.length - 1].author === AUTHOR.user) {
-      const timeout = setTimeout(() => {
-        addMessage({
-          author: AUTHOR.bot,
-          text: 'Hello Artem!',
-        });
-      }, 1500);
-
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages]);
-
   return (
-    <div className={style.flud}>
-      <MessageList messages={messages} />
-      <Form addMessage={addMessage} />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/chats" element={<ChatList />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
