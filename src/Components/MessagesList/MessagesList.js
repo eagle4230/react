@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import style from './MessagesList.module.css';
 
 export const MessageList = ({ messages }) => (
@@ -11,6 +11,6 @@ export const MessageList = ({ messages }) => (
   </ul>
 );
 
-MessageList.propTypes = {
-  messages: PropTypes.array,
-};
+// MessageList.propTypes = {
+//   messages: PropTypes.array,
+// };
