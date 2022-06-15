@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Form } from '../Components/Form';
 import { MessageList } from '../Components/MessagesList';
 import { AUTHOR } from '../data';
@@ -36,11 +36,15 @@ export const ChatPage = ({ chats, onAddChat, messages, onAddMessage }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chatId, messages]);
 
-  const handleAddMessage = (mesasge) => {
-    if (chatId) {
-      onAddMessage(chatId, mesasge);
-    }
-  };
+  const handleAddMessage = useCallback(
+    (mesasge) => {
+      if (chatId) {
+        onAddMessage(chatId, mesasge);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [chatId]
+  );
 
   if (chatId && !messages[chatId]) {
     return <Navigate to="/chats" replace />;
