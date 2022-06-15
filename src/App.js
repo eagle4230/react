@@ -45,6 +45,12 @@ export const App = () => {
     });
   };
 
+  const onDeleteChat = (name) => {
+    const newMessages = { ...messages };
+    delete newMessages[name];
+    setMessages(newMessages);
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -54,7 +60,13 @@ export const App = () => {
           <Route path="/chats">
             <Route
               index
-              element={<ChatList chats={chats} onAddChat={onAddChat} />}
+              element={
+                <ChatList
+                  chats={chats}
+                  onAddChat={onAddChat}
+                  onDeleteChat={onDeleteChat}
+                />
+              }
             />
             <Route
               path=":chatId"
@@ -64,6 +76,7 @@ export const App = () => {
                   onAddChat={onAddChat}
                   messages={messages}
                   onAddMessage={onAddMessage}
+                  onDeleteChat={onDeleteChat}
                 />
               }
             />

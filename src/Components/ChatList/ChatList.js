@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export const ChatList = ({ chats, onAddChat }) => {
+export const ChatList = ({ chats, onAddChat, onDeleteChat }) => {
   const [value, setValue] = useState('');
 
   const handleChange = (e) => {
@@ -28,6 +28,7 @@ export const ChatList = ({ chats, onAddChat }) => {
         {chats.map((chat) => (
           <ListItem key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
+            <button onClick={() => onDeleteChat(chat.name)}> X </button>
           </ListItem>
         ))}
       </ul>

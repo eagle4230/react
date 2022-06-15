@@ -13,7 +13,13 @@ import { Navigate, useParams } from 'react-router-dom';
 //   },
 // ];
 
-export const ChatPage = ({ chats, onAddChat, messages, onAddMessage }) => {
+export const ChatPage = ({
+  chats,
+  onAddChat,
+  messages,
+  onAddMessage,
+  onDeleteChat,
+}) => {
   const { chatId } = useParams();
 
   useEffect(() => {
@@ -52,7 +58,11 @@ export const ChatPage = ({ chats, onAddChat, messages, onAddMessage }) => {
 
   return (
     <>
-      <ChatList chats={chats} onAddChat={onAddChat} />
+      <ChatList
+        chats={chats}
+        onAddChat={onAddChat}
+        onDeleteChat={onDeleteChat}
+      />
       <div className={style.flud}>
         <MessageList messages={messages[chatId]} />
         <Form addMessage={handleAddMessage} />
