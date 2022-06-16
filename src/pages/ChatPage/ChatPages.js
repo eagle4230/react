@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect } from 'react';
-import { Form } from '../Components/Form';
-import { MessageList } from '../Components/MessagesList';
-import { AUTHOR } from '../data';
-import style from '../App.module.css';
-import { ChatList } from '../Components/ChatList/ChatList';
+import { Form } from '../../Components/Form';
+import { MessageList } from '../../Components/MessagesList';
+import { AUTHOR } from '../../data';
+import style from '../../App.module.css';
+import { ChatList } from '../../Components/ChatList/ChatList';
 import { Navigate, useParams } from 'react-router-dom';
+import { WithClasses } from '../../HOC/WithClasses';
+
+import style2 from './ChatPage.module.css';
 
 // const startMessages = [
 //   {
@@ -13,8 +16,15 @@ import { Navigate, useParams } from 'react-router-dom';
 //   },
 // ];
 
-export const ChatPage = ({ chats, onAddChat, messages, onAddMessage }) => {
+export const ChatPage = ({
+  chats,
+  onAddChat,
+  messages,
+  onAddMessage,
+  onDeleteChat,
+}) => {
   const { chatId } = useParams();
+  const MessageListWithClass = WithClasses(MessageList);
 
   useEffect(() => {
     if (
@@ -37,13 +47,13 @@ export const ChatPage = ({ chats, onAddChat, messages, onAddMessage }) => {
   }, [chatId, messages]);
 
   const handleAddMessage = useCallback(
-    (mesasge) => {
+    (message) => {
       if (chatId) {
-        onAddMessage(chatId, mesasge);
+        onAddMessage(chatId, message);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [chatId]
+    [chatId, onAddMessage]
   );
 
   if (chatId && !messages[chatId]) {
@@ -52,9 +62,17 @@ export const ChatPage = ({ chats, onAddChat, messages, onAddMessage }) => {
 
   return (
     <>
-      <ChatList chats={chats} onAddChat={onAddChat} />
+      <ChatList
+        chats={chats}
+        onAddChat={onAddChat}
+        onDeleteChat={onDeleteChat}
+      />
       <div className={style.flud}>
-        <MessageList messages={messages[chatId]} />
+        {/* <MessageList messages={messages[chatId]} /> */}
+        <MessageListWithClass
+          messages={messages[chatId]}
+          classes={style2.border}
+        />
         <Form addMessage={handleAddMessage} />
       </div>
     </>
