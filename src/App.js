@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ChatList } from './Components/ChatList/ChatList';
 import { Header } from './Components/Header';
 import { Main } from './pages/Main';
-import { ChatPage } from './pages/ChatPages';
+import { ChatPage } from './pages/ChatPage/ChatPages';
 import { nanoid } from 'nanoid';
 import { defaultContext, ThemeContext } from './utils/ThemeContext';
 // import { Profile } from './pages/Profile';
