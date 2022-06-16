@@ -5,6 +5,7 @@ import { Header } from './Components/Header';
 import { Main } from './pages/Main';
 import { ChatPage } from './pages/ChatPages';
 import { nanoid } from 'nanoid';
+import { defaultContext, ThemeContext } from './utils/ThemeContext';
 // import { Profile } from './pages/Profile';
 
 const Profile = React.lazy(() =>
@@ -22,6 +23,11 @@ const defaultMessages = {
 
 export const App = () => {
   const [messages, setMessages] = useState(defaultMessages);
+  const [theme, setTheme] = useState(defaultContext.theme);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   const chats = useMemo(
     () =>
@@ -55,39 +61,46 @@ export const App = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Header />}>
-            <Route index element={<Main />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/chats">
-              <Route
-                index
-                element={
-                  <ChatList
-                    chats={chats}
-                    onAddChat={onAddChat}
-                    onDeleteChat={onDeleteChat}
-                  />
-                }
-              />
-              <Route
-                path=":chatId"
-                element={
-                  <ChatPage
-                    chats={chats}
-                    onAddChat={onAddChat}
-                    messages={messages}
-                    onAddMessage={onAddMessage}
-                    onDeleteChat={onDeleteChat}
-                  />
-                }
-              />
+      <ThemeContext.Provider
+        value={{
+          theme,
+          toggleTheme,
+        }}
+      >
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Header />}>
+              <Route index element={<Main />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/chats">
+                <Route
+                  index
+                  element={
+                    <ChatList
+                      chats={chats}
+                      onAddChat={onAddChat}
+                      onDeleteChat={onDeleteChat}
+                    />
+                  }
+                />
+                <Route
+                  path=":chatId"
+                  element={
+                    <ChatPage
+                      chats={chats}
+                      onAddChat={onAddChat}
+                      messages={messages}
+                      onAddMessage={onAddMessage}
+                      onDeleteChat={onDeleteChat}
+                    />
+                  }
+                />
+              </Route>
             </Route>
-          </Route>
-          <Route path="*" element={<h2>404 page</h2>} />
-        </Routes>
-      </BrowserRouter>
+            <Route path="*" element={<h2>404 page</h2>} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeContext.Provider>
     </Suspense>
   );
 };
