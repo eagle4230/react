@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { AUTHOR } from '../../data';
+import { AUTHOR } from 'src/data';
 import style from './Form.module.css';
 import { Button } from './components/Button';
 import { Input } from './components/Input';

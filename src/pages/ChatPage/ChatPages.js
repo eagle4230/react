@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
-import { Form } from '../../Components/Form';
-import { MessageList } from '../../Components/MessagesList';
-import { AUTHOR } from '../../data';
+import { Form } from 'components/Form';
+import { MessageList } from 'components/MessagesList';
+import { AUTHOR } from 'src/data';
 import style from '../../App.module.css';
-import { ChatList } from '../../Components/ChatList/ChatList';
+import { ChatList } from 'src/Components/ChatList/ChatList';
 import { Navigate, useParams } from 'react-router-dom';
-import { WithClasses } from '../../HOC/WithClasses';
+import { WithClasses } from 'src/HOC/WithClasses';
 
 import style2 from './ChatPage.module.css';
 
