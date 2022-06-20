@@ -1,8 +1,7 @@
 // import { AUTHOR } from "../../data";
-import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from "./actions";
+import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './actions';
 import { AUTHOR } from 'src/constants';
-import { nanoid } from "nanoid";
-
+import { nanoid } from 'nanoid';
 
 const initialMessages = {
   default: [
@@ -36,7 +35,7 @@ export const messageReducer = (state = initialMessages, action) => {
             id: nanoid(),
             author: AUTHOR.user,
             text: action.text,
-          }
+          },
         ],
       };
     }
