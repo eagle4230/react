@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { Form } from 'components/Form';
 import { MessageList } from 'components/MessagesList';
 import { AUTHOR } from 'src/data';
-import style from '../../App.module.css';
+import style from 'src/App.module.css';
 import { ChatList } from 'src/Components/ChatList/ChatList';
 import { Navigate, useParams } from 'react-router-dom';
 import { WithClasses } from 'src/HOC/WithClasses';
