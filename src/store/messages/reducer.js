@@ -1,6 +1,6 @@
 // import { AUTHOR } from "../../data";
 import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './actions';
-import { AUTHOR } from 'src/constants';
+import { AUTHOR } from 'src/data';
 import { nanoid } from 'nanoid';
 
 const initialMessages = {

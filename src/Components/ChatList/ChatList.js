@@ -1,10 +1,21 @@
 import { ListItem } from '@mui/material';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addChat, deleteChat } from '../../store/messages/actions';
 
-export const ChatList = ({ chats, onAddChat, onDeleteChat }) => {
+export const ChatList = () => {
   const [value, setValue] = useState('');
+
+  const dispatch = useDispatch();
+
+  const chats = useSelector((state) =>
+    Object.keys(state.messages).map((chat) => ({
+      id: nanoid(),
+      name: chat,
+    }))
+  );
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -14,10 +25,7 @@ export const ChatList = ({ chats, onAddChat, onDeleteChat }) => {
     e.preventDefault();
 
     if (value) {
-      onAddChat({
-        id: nanoid(),
-        name: value,
-      });
+      dispatch(addChat(value));
       setValue('');
     }
   };
@@ -28,7 +36,7 @@ export const ChatList = ({ chats, onAddChat, onDeleteChat }) => {
         {chats.map((chat) => (
           <ListItem key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
-            <button onClick={() => onDeleteChat(chat.name)}> X </button>
+            <button onClick={() => dispatch(deleteChat(chat.name))}> X </button>
           </ListItem>
         ))}
       </ul>

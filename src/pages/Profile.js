@@ -6,8 +6,8 @@ import { store } from '../store';
 
 export const Profile = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const visible = useSelector((state) => state.visible);
-  const name = useSelector((state) => state.name);
+  const visible = useSelector((state) => state.profile.visible);
+  const name = useSelector((state) => state.profile.name);
 
   const [value, setValue] = useState('');
 
