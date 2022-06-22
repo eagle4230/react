@@ -10,11 +10,10 @@ export const ChatList = () => {
 
   const dispatch = useDispatch();
 
-  const chats = useSelector(selectChats);
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
+  const chats = useSelector(
+    selectChats,
+    (prev, next) => prev.length === next.length
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +35,7 @@ export const ChatList = () => {
         ))}
       </ul>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={handleChange} />
+        <input type="text" value={value} onChange={e => setValue(e.target.value)} />
         <button>Create Chat</button>
       </form>
     </>

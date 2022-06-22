@@ -5,7 +5,7 @@ import { ChatList } from 'src/Components/ChatList/ChatList';
 import { Navigate, useParams } from 'react-router-dom';
 import { WithClasses } from 'src/HOC/WithClasses';
 import style2 from './ChatPage.module.css';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { selectMessages } from '../../store/messages/selectors';
 
 // const startMessages = [
@@ -19,7 +19,7 @@ export const ChatPage = () => {
   const { chatId } = useParams();
   const MessageListWithClass = WithClasses(MessageList);
 
-  const messages = useSelector(selectMessages);
+  const messages = useSelector(selectMessages, shallowEqual);
 
   // useEffect(() => {
   //   if (
