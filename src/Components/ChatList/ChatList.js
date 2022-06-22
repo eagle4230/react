@@ -35,7 +35,11 @@ export const ChatList = () => {
         ))}
       </ul>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={e => setValue(e.target.value)} />
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
         <button>Create Chat</button>
       </form>
     </>
