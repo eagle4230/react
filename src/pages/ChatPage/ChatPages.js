@@ -6,6 +6,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { WithClasses } from 'src/HOC/WithClasses';
 import style2 from './ChatPage.module.css';
 import { useSelector } from 'react-redux';
+import { selectMessages } from '../../store/messages/selectors';
 
 // const startMessages = [
 //   {
@@ -18,7 +19,7 @@ export const ChatPage = () => {
   const { chatId } = useParams();
   const MessageListWithClass = WithClasses(MessageList);
 
-  const messages = useSelector((state) => state.messages);
+  const messages = useSelector(selectMessages);
 
   // useEffect(() => {
   //   if (
@@ -48,7 +49,7 @@ export const ChatPage = () => {
     <>
       <ChatList />
       <div className={style.flud}>
-        <MessageList messages={chatId ? messages[chatId] : []} />
+        {/* <MessageList messages={chatId ? messages[chatId] : []} /> */}
         <MessageListWithClass
           messages={chatId ? messages[chatId] : []}
           classes={style2.border}
