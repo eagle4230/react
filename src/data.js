@@ -19,4 +19,9 @@ export const NAVIGATE = [
     name: 'Chats',
     to: '/chats',
   },
+  {
+    id: 4,
+    name: 'About',
+    to: '/about',
+  },
 ];

@@ -7,6 +7,7 @@ import { ChatPage } from './pages/ChatPage/ChatPages';
 import { defaultContext, ThemeContext } from './utils/ThemeContext';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { AboutWithConnect } from './pages/About';
 
 const Profile = React.lazy(() =>
   Promise.all([
@@ -48,6 +49,7 @@ export const App = () => {
               <Route path="/" element={<Header />}>
                 <Route index element={<Main />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/about" element={<AboutWithConnect />} />
                 <Route path="/chats">
                   <Route index element={<ChatList />} />
                   <Route path=":chatId" element={<ChatPage />} />
