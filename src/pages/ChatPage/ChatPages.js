@@ -1,13 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
-import { Form } from '../../Components/Form';
-import { MessageList } from '../../Components/MessagesList';
-import { AUTHOR } from '../../data';
-import style from '../../App.module.css';
-import { ChatList } from '../../Components/ChatList/ChatList';
+import { Form } from 'components/Form';
+import { MessageList } from 'components/MessagesList';
+import style from 'src/App.module.css';
+import { ChatList } from 'src/Components/ChatList/ChatList';
 import { Navigate, useParams } from 'react-router-dom';
-import { WithClasses } from '../../HOC/WithClasses';
-
+import { WithClasses } from 'src/HOC/WithClasses';
 import style2 from './ChatPage.module.css';
+import { shallowEqual, useSelector } from 'react-redux';
+import { selectMessages } from '../../store/messages/selectors';
 
 // const startMessages = [
 //   {
@@ -16,45 +15,31 @@ import style2 from './ChatPage.module.css';
 //   },
 // ];
 
-export const ChatPage = ({
-  chats,
-  onAddChat,
-  messages,
-  onAddMessage,
-  onDeleteChat,
-}) => {
+export const ChatPage = () => {
   const { chatId } = useParams();
   const MessageListWithClass = WithClasses(MessageList);
 
-  useEffect(() => {
-    if (
-      chatId &&
-      messages[chatId]?.length > 0 &&
-      messages[chatId][messages[chatId].length - 1].author === AUTHOR.user
-    ) {
-      const timeout = setTimeout(() => {
-        onAddMessage(chatId, {
-          author: AUTHOR.bot,
-          text: 'Hello Artem!',
-        });
-      }, 1500);
+  const messages = useSelector(selectMessages, shallowEqual);
 
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chatId, messages]);
+  // useEffect(() => {
+  //   if (
+  //     chatId &&
+  //     messages[chatId]?.length > 0 &&
+  //     messages[chatId][messages[chatId].length - 1].author === AUTHOR.user
+  //   ) {
+  //     const timeout = setTimeout(() => {
+  //       onAddMessage(chatId, {
+  //         author: AUTHOR.bot,
+  //         text: 'Hello Artem!',
+  //       });
+  //     }, 1500);
 
-  const handleAddMessage = useCallback(
-    (message) => {
-      if (chatId) {
-        onAddMessage(chatId, message);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [chatId, onAddMessage]
-  );
+  //     return () => {
+  //       clearTimeout(timeout);
+  //     };
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [chatId, messages]);
 
   if (chatId && !messages[chatId]) {
     return <Navigate to="/chats" replace />;
@@ -62,18 +47,14 @@ export const ChatPage = ({
 
   return (
     <>
-      <ChatList
-        chats={chats}
-        onAddChat={onAddChat}
-        onDeleteChat={onDeleteChat}
-      />
+      <ChatList />
       <div className={style.flud}>
-        {/* <MessageList messages={messages[chatId]} /> */}
+        {/* <MessageList messages={chatId ? messages[chatId] : []} /> */}
         <MessageListWithClass
-          messages={messages[chatId]}
+          messages={chatId ? messages[chatId] : []}
           classes={style2.border}
         />
-        <Form addMessage={handleAddMessage} />
+        <Form />
       </div>
     </>
   );
