@@ -6,7 +6,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { WithClasses } from 'src/HOC/WithClasses';
 import style2 from './ChatPage.module.css';
 import { shallowEqual, useSelector } from 'react-redux';
-import { selectMessages } from '../../store/messages/selectors';
+import { selectMessages } from 'src/store/messages/selectors';
 
 // const startMessages = [
 //   {

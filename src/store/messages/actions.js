@@ -1,4 +1,4 @@
-import { AUTHOR } from '../../data';
+import { AUTHOR } from 'src/data';
 
 export const ADD_CHAT = 'MESSAGES::ADD_CHAT';
 export const DELETE_CHAT = 'MESSAGES::DELETE_CHAT';
@@ -21,7 +21,10 @@ export const addMessage = (chatName, message) => ({
 });
 
 export const addMessageWithReply = (chatName, message) => (dispatch) => {
-  dispatch(addMessage(chatName, message));
+  dispatch(addMessage(chatName, {
+    author: AUTHOR.user,
+    text: message.text,
+  }));
 
   if (message.author !== AUTHOR.bot) {
     dispatch(
