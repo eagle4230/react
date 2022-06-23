@@ -21,10 +21,12 @@ export const addMessage = (chatName, message) => ({
 });
 
 export const addMessageWithReply = (chatName, message) => (dispatch) => {
-  dispatch(addMessage(chatName, {
-    author: AUTHOR.user,
-    text: message.text,
-  }));
+  dispatch(
+    addMessage(chatName, {
+      author: AUTHOR.user,
+      text: message.text,
+    })
+  );
 
   if (message.author !== AUTHOR.bot) {
     dispatch(
