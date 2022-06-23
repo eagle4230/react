@@ -6,8 +6,9 @@ import { Input } from './components/Input';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { addMessage } from '../../store/messages/actions';
+import { addMessage, addMessageWithReply } from '../../store/messages/actions';
 import { useParams } from 'react-router-dom';
+import { AUTHOR } from '../../data';
 
 export const Form = memo(() => {
   const [text, setText] = useState('');
@@ -26,7 +27,7 @@ export const Form = memo(() => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (chatId) {
-      dispatch(addMessage(chatId, text));
+      dispatch(addMessageWithReply(chatId, { AUTHOR, text }));
     }
     setText('');
   };
