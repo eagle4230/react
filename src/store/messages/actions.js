@@ -20,6 +20,8 @@ export const addMessage = (chatName, message) => ({
   message,
 });
 
+let timeout;
+
 export const addMessageWithReply = (chatName, message) => (dispatch) => {
   dispatch(
     addMessage(chatName, {
@@ -29,31 +31,16 @@ export const addMessageWithReply = (chatName, message) => (dispatch) => {
   );
 
   if (message.author !== AUTHOR.bot) {
-    dispatch(
+
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
+    timeout = setTimeout(() => dispatch(
       addMessage(chatName, {
         author: AUTHOR.bot,
         text: 'Hello Artem!',
       })
-    );
+    ), 1000);
   }
 };
-
-// useEffect(() => {
-//   if (
-//     chatId &&
-//     messages[chatId]?.length > 0 &&
-//     messages[chatId][messages[chatId].length - 1].author === AUTHOR.user
-//   ) {
-//     const timeout = setTimeout(() => {
-//       onAddMessage(chatId, {
-//         author: AUTHOR.bot,
-//         text: 'Hello Artem!',
-//       });
-//     }, 1500);
-
-//     return () => {
-//       clearTimeout(timeout);
-//     };
-//   }
-//   // eslint-disable-next-line react-hooks/exhaustive-deps
-// }, [chatId, messages]);

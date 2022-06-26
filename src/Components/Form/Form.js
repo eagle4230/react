@@ -6,9 +6,9 @@ import { Input } from './components/Input';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { addMessage, addMessageWithReply } from '../../store/messages/actions';
+import { addMessage, addMessageWithReply } from 'src/store/messages/actions';
 import { useParams } from 'react-router-dom';
-import { AUTHOR } from '../../data';
+import { AUTHOR } from 'src/data';
 
 export const Form = memo(() => {
   const [text, setText] = useState('');
