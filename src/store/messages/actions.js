@@ -31,16 +31,19 @@ export const addMessageWithReply = (chatName, message) => (dispatch) => {
   );
 
   if (message.author !== AUTHOR.bot) {
-
     if (timeout) {
       clearTimeout(timeout);
     }
 
-    timeout = setTimeout(() => dispatch(
-      addMessage(chatName, {
-        author: AUTHOR.bot,
-        text: 'Hello Artem!',
-      })
-    ), 1000);
+    timeout = setTimeout(
+      () =>
+        dispatch(
+          addMessage(chatName, {
+            author: AUTHOR.bot,
+            text: 'Hello Artem!',
+          })
+        ),
+      1000
+    );
   }
 };
