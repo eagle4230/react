@@ -11,4 +11,7 @@ const rootReducer = combineReducers({
   messages: messageReducer,
 });
 
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
