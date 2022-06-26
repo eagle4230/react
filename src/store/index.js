@@ -1,14 +1,19 @@
-import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-
-import { persistStore, persistReducer } from 'redux-persist';
+import { combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { profileReducer } from './profile/reducer';
+import { profileReducer } from './profile/slice';
 import { messageReducer } from './messages/reducer';
-
-export const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistConfig = {
   key: 'root',
@@ -23,9 +28,14 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = createStore(
-  persistedReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
 
 export const persistor = persistStore(store);

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleProfile } from 'src/store/profile/actions';
+import { toggleProfile } from 'src/store/profile/slice';
 
 export const About = (props) => {
   return (
