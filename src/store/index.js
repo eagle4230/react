@@ -14,7 +14,7 @@ const persistConfig = {
   key: 'root',
   storage,
   blacklist: ['profile'],
-}
+};
 
 const rootReducer = combineReducers({
   profile: profileReducer,
