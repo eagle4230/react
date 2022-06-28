@@ -33,8 +33,8 @@ export const messageReducer = (state = initialMessages, action) => {
           ...state[action.chatName],
           {
             id: nanoid(),
-            author: AUTHOR.user,
-            text: action.text,
+            author: action.message.author,
+            text: action.message.text,
           },
         ],
       };

@@ -6,7 +6,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { WithClasses } from 'src/HOC/WithClasses';
 import style2 from './ChatPage.module.css';
 import { shallowEqual, useSelector } from 'react-redux';
-import { selectMessages } from '../../store/messages/selectors';
+import { selectMessages } from 'src/store/messages/selectors';
 
 // const startMessages = [
 //   {
@@ -20,26 +20,6 @@ export const ChatPage = () => {
   const MessageListWithClass = WithClasses(MessageList);
 
   const messages = useSelector(selectMessages, shallowEqual);
-
-  // useEffect(() => {
-  //   if (
-  //     chatId &&
-  //     messages[chatId]?.length > 0 &&
-  //     messages[chatId][messages[chatId].length - 1].author === AUTHOR.user
-  //   ) {
-  //     const timeout = setTimeout(() => {
-  //       onAddMessage(chatId, {
-  //         author: AUTHOR.bot,
-  //         text: 'Hello Artem!',
-  //       });
-  //     }, 1500);
-
-  //     return () => {
-  //       clearTimeout(timeout);
-  //     };
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [chatId, messages]);
 
   if (chatId && !messages[chatId]) {
     return <Navigate to="/chats" replace />;
