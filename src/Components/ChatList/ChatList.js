@@ -30,7 +30,10 @@ export const ChatList = () => {
         {chats.map((chat) => (
           <ListItem key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
-            <button onClick={() => dispatch(deleteChat({ name: chat.name }))}> X </button>
+            <button onClick={() => dispatch(deleteChat({ name: chat.name }))}>
+              {' '}
+              X{' '}
+            </button>
           </ListItem>
         ))}
       </ul>

@@ -8,8 +8,8 @@ const initialState = {
       id: '1',
       author: AUTHOR.user,
       text: 'Hello!',
-    }
-  ]
+    },
+  ],
 };
 
 const messagesSlice = createSlice({
@@ -27,7 +27,7 @@ const messagesSlice = createSlice({
         id: nanoid(),
         author: action.payload.message.author,
         text: action.payload.message.text,
-      })
+      });
     },
   },
 });
@@ -43,14 +43,16 @@ export const addMessageWithReply = createAsyncThunk(
         clearTimeout(timeout);
       }
       timeout = setTimeout(() => {
-        dispatch(addMessage({
-          chatName,
-          message: {
-            author: AUTHOR.bot,
-            text: 'Im BOT!',
-          },
-        }));
-      }, 1000)
+        dispatch(
+          addMessage({
+            chatName,
+            message: {
+              author: AUTHOR.bot,
+              text: 'Im BOT!',
+            },
+          })
+        );
+      }, 1000);
     }
   }
 );
