@@ -17,7 +17,7 @@ export const Articles = () => {
         .then((data) => setArticles(data))
         .catch((err) => setError(err.message))
         .finally(() => setLoadigin(false));
-    }, 1000)
+    }, 1000);
   }, []);
 
   return (
