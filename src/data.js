@@ -24,4 +24,11 @@ export const NAVIGATE = [
     name: 'About',
     to: '/about',
   },
+  {
+    id: 5,
+    name: 'Articles',
+    to: '/articles',
+  },
 ];
+
+export const api = 'https://api.spaceflightnewsapi.net/v3/articles';
