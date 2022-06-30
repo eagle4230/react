@@ -11,6 +11,8 @@ import { AboutWithConnect } from './pages/About';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Articles } from './pages/Articles';
 import { SignIn } from './pages/SignIn';
+import { PrivateRoute } from './Components/PrivateRoute';
+import { PublicRoute } from './Components/PublicRoute';
 
 const Profile = React.lazy(() =>
   Promise.all([
@@ -52,11 +54,11 @@ export const App = () => {
               <Routes>
                 <Route path="/" element={<Header />}>
                   <Route index element={<Main />} />
-                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/profile" element={<PrivateRoute component={<Profile />} />} />
                   <Route path="/articles" element={<Articles />} />
                   <Route path="/about" element={<AboutWithConnect />} />
-                  <Route path="/signin" element={<SignIn />} />
-                  <Route path="/chats">
+                  <Route path="/signin" element={<PublicRoute component={<SignIn />} />} />
+                  <Route path="/chats" element={<PrivateRoute />} >
                     <Route index element={<ChatList />} />
                     <Route path=":chatId" element={<ChatPage />} />
                   </Route>
