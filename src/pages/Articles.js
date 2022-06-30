@@ -7,23 +7,34 @@ export const Articles = () => {
   const [loadign, setLoadigin] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
+  const getFetchArticles = async () => {
     setLoadigin(true);
     setError('');
 
-    setTimeout(() => {
-      fetch(api)
-        .then((res) => res.json())
-        .then((data) => setArticles(data))
-        .catch((err) => setError(err.message))
-        .finally(() => setLoadigin(false));
-    }, 1000);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    try {
+      const res = await fetch(api);
+      if (res.ok) {
+        const data = await res.json();
+        setArticles(data);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoadigin(false);
+    }
+  };
+
+  useEffect(() => {
+    getFetchArticles();
   }, []);
 
   return (
     <>
       <h2>Articles</h2>
       {loadign && <p>Loading...</p>}
+      <button onClick={getFetchArticles}>get data</button>
       {!loadign && (
         <ul>
           {articles.map((article) => (
