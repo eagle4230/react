@@ -10,6 +10,7 @@ import { persistor, store } from './store';
 import { AboutWithConnect } from './pages/About';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Articles } from './pages/Articles';
+import { SignIn } from './pages/SignIn';
 
 const Profile = React.lazy(() =>
   Promise.all([
@@ -54,6 +55,7 @@ export const App = () => {
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/articles" element={<Articles />} />
                   <Route path="/about" element={<AboutWithConnect />} />
+                  <Route path="/signin" element={<SignIn />} />
                   <Route path="/chats">
                     <Route index element={<ChatList />} />
                     <Route path=":chatId" element={<ChatPage />} />
