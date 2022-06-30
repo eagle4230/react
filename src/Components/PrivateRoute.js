@@ -9,4 +9,4 @@ export const PrivateRoute = ({ component }) => {
     return <Navigate to="/signin" />;
   }
   return component ? component : <Outlet />;
-}
+};
