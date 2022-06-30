@@ -25,7 +25,9 @@ export const Header = () => {
         </ul>
       </header>
       <div>
-        {isAuth && <button onClick={() => dispatch(auth(false))}>logout</button>}
+        {isAuth && (
+          <button onClick={() => dispatch(auth(false))}>logout</button>
+        )}
         {!isAuth && <button onClick={handleLogin}>login</button>}
       </div>
       <main>
