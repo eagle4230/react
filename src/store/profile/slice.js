@@ -17,7 +17,7 @@ const profileSlice = createSlice({
       state.name = action.payload;
     },
     auth: (state, action) => {
-      state.isAuth = action.payload
+      state.isAuth = action.payload;
     },
   },
 });

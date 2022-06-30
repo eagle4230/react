@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { auth } from "../store/profile/slice";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { auth } from '../store/profile/slice';
 
 export const SignIn = () => {
   const [login, setLogin] = useState('');
@@ -25,9 +25,17 @@ export const SignIn = () => {
       <h2>Sign in</h2>
       <form onSubmit={handleSubmit}>
         <p>Логин:</p>
-        <input type='text' value={login} onChange={(e) => setLogin(e.target.value)} />
+        <input
+          type="text"
+          value={login}
+          onChange={(e) => setLogin(e.target.value)}
+        />
         <p>Пароль:</p>
-        <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <br />
         <button>login</button>
       </form>
