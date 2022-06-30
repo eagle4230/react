@@ -6,9 +6,10 @@ import { Input } from './components/Input';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { addMessage, addMessageWithReply } from 'src/store/messages/actions';
+import { addMessage } from 'src/store/messages/slice';
 import { useParams } from 'react-router-dom';
 import { AUTHOR } from 'src/data';
+import { addMessageWithReply } from '../../store/messages/slice';
 
 export const Form = memo(() => {
   const [text, setText] = useState('');
@@ -27,8 +28,14 @@ export const Form = memo(() => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (chatId) {
-      dispatch(addMessageWithReply(chatId, { AUTHOR, text }));
+      dispatch(
+        addMessageWithReply({
+          chatName: chatId,
+          message: { author: AUTHOR.user, text },
+        })
+      );
     }
+
     setText('');
   };
 
