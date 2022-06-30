@@ -17,15 +17,13 @@ export const Articles = () => {
       <h2>Articles</h2>
       {loadign && <p>Loading...</p>}
       <button onClick={() => dispatch(fetchData())}>get data</button>
-      {
-        !loadign && (
-          <ul>
-            {articles.map((article) => (
-              <li key={article.id}>{article.title}</li>
-            ))}
-          </ul>
-        )
-      }
+      {!loadign && (
+        <ul>
+          {articles.map((article) => (
+            <li key={article.id}>{article.title}</li>
+          ))}
+        </ul>
+      )}
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </>

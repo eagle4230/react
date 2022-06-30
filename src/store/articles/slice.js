@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { api } from '../../data'
+import { api } from '../../data';
 
 const initialState = {
   articles: [],
@@ -13,7 +13,7 @@ const articlesSlice = createSlice({
   reducers: {
     addArticles(state, action) {
       state.articles = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -38,7 +38,8 @@ export const fetchData = createAsyncThunk(
     const response = await fetch(api);
     const data = await response.json();
     return data;
-  });
+  }
+);
 
 export const { addArticles } = articlesSlice.actions;
 export const articlesReducer = articlesSlice.reducer;
