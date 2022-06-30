@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../store/profile/slice';
 
 export const SignIn = () => {
@@ -8,6 +9,7 @@ export const SignIn = () => {
   const [error, setError] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,6 +17,7 @@ export const SignIn = () => {
 
     if (login === 'gb' && password === 'gb') {
       dispatch(auth(true));
+      navigate('/', { replace: true });
     } else {
       setError(true);
     }
