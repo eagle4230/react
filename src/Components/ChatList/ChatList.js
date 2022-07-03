@@ -1,27 +1,41 @@
 import { ListItem } from '@mui/material';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addChat, deleteChat } from '../../store/messages/slice';
-import { selectChats } from '../../store/messages/selectors';
+import { onValue, push, remove } from 'firebase/database';
+import { getChatById, messagesRef } from '../../services/firebase';
+import { useEffect } from 'react';
 
 export const ChatList = () => {
   const [value, setValue] = useState('');
+  const [chats, setChats] = useState([]);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    const unsubscribe = onValue(messagesRef, (snapshot) => {
+      const messages = snapshot.val();
+      const newChats = Object.entries(messages).map(item => ({
+        id: item[0],
+        name: item[1].name,
+      }));
+      setChats(newChats);
+    });
+    return unsubscribe;
+  }, []);
 
-  const chats = useSelector(
-    selectChats,
-    (prev, next) => prev.length === next.length
-  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (value) {
-      dispatch(addChat({ name: value }));
+      push(messagesRef, {
+        name: value,
+      });
+
       setValue('');
     }
+  };
+
+  const handleDeleteChat = (chatId) => {
+    remove(getChatById(chatId));
   };
 
   return (
@@ -30,7 +44,7 @@ export const ChatList = () => {
         {chats.map((chat) => (
           <ListItem key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
-            <button onClick={() => dispatch(deleteChat({ name: chat.name }))}>
+            <button onClick={() => handleDeleteChat(chat.id)}>
               {' '}
               X{' '}
             </button>

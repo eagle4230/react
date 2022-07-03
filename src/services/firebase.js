@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
+import { ref, getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDVSSS5ESoVWRR8sXp-yzQ7tbaxFew6wqQ',
@@ -26,3 +27,10 @@ export const logIn = async (email, password) =>
   await signInWithEmailAndPassword(firebaseAuth, email, password);
 
 export const logOut = async () => await signOut(firebaseAuth);
+
+const db = getDatabase(app);
+
+export const userRef = ref(db, 'user');
+export const messagesRef = ref(db, 'messages');
+
+export const getChatById = (chatId) => ref(db, `messages/${chatId}`);
