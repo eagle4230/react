@@ -12,7 +12,7 @@ export const ChatList = () => {
   useEffect(() => {
     const unsubscribe = onValue(messagesRef, (snapshot) => {
       const messages = snapshot.val();
-      const newChats = Object.entries(messages).map(item => ({
+      const newChats = Object.entries(messages).map((item) => ({
         id: item[0],
         name: item[1].name,
       }));
@@ -20,7 +20,6 @@ export const ChatList = () => {
     });
     return unsubscribe;
   }, []);
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,10 +43,7 @@ export const ChatList = () => {
         {chats.map((chat) => (
           <ListItem key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
-            <button onClick={() => handleDeleteChat(chat.id)}>
-              {' '}
-              X{' '}
-            </button>
+            <button onClick={() => handleDeleteChat(chat.id)}> X </button>
           </ListItem>
         ))}
       </ul>
