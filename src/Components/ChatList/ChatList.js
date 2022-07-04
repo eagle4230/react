@@ -1,32 +1,30 @@
 import { ListItem } from '@mui/material';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { onValue, push, remove } from 'firebase/database';
-import { getChatById, messagesRef } from '../../services/firebase';
-import { useEffect } from 'react';
+import { push, remove, set } from 'firebase/database';
+import {
+  getChatById,
+  getMessageListById,
+  messagesRef,
+} from '../../services/firebase';
 
-export const ChatList = () => {
+export const ChatList = ({ chats, messagesDB }) => {
   const [value, setValue] = useState('');
-  const [chats, setChats] = useState([]);
-
-  useEffect(() => {
-    const unsubscribe = onValue(messagesRef, (snapshot) => {
-      const messages = snapshot.val();
-      const newChats = Object.entries(messages).map((item) => ({
-        id: item[0],
-        name: item[1].name,
-      }));
-      setChats(newChats);
-    });
-    return unsubscribe;
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (value) {
-      push(messagesRef, {
-        name: value,
+      set(messagesRef, {
+        ...messagesDB,
+        [value]: {
+          name: value,
+        },
+      });
+
+      push(getMessageListById(value), {
+        text: 'Chat has been created',
+        author: 'Admin',
       });
 
       setValue('');
