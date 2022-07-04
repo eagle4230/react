@@ -1,25 +1,27 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../store/profile/slice';
+import { logIn } from '../services/firebase';
 
 export const SignIn = () => {
-  const [login, setLogin] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(false);
 
-    if (login === 'gb' && password === 'gb') {
-      dispatch(auth(true));
-      navigate('/', { replace: true });
-    } else {
-      setError(true);
+    try {
+      setError('');
+      setLoading(true);
+      await logIn(email, password);
+      navigate('/chats', { replace: true });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -29,9 +31,9 @@ export const SignIn = () => {
       <form onSubmit={handleSubmit}>
         <p>Логин:</p>
         <input
-          type="text"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <p>Пароль:</p>
         <input
@@ -42,7 +44,8 @@ export const SignIn = () => {
         <br />
         <button>login</button>
       </form>
-      {error && <p style={{ color: 'red' }}>Логин или пароль не верны!</p>}
+      {loading && <div>Loading...</div>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </>
   );
 };

@@ -1,16 +1,23 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { NAVIGATE } from '../data';
+import { logOut } from '../services/firebase';
 import { selectAuth } from '../store/profile/selectors';
-import { auth } from '../store/profile/slice';
 
 export const Header = () => {
   const isAuth = useSelector(selectAuth);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleLogin = () => {
     navigate('/signin', { replace: true });
+  };
+
+  const handleSignUp = () => {
+    navigate('/signup', { replace: true });
+  };
+
+  const handleLogOut = async () => {
+    await logOut();
   };
 
   return (
@@ -25,10 +32,17 @@ export const Header = () => {
         </ul>
       </header>
       <div>
-        {isAuth && (
-          <button onClick={() => dispatch(auth(false))}>logout</button>
+        {!isAuth && (
+          <>
+            <button onClick={handleLogin}>login</button>
+            <button onClick={handleSignUp}>sign up</button>
+          </>
         )}
-        {!isAuth && <button onClick={handleLogin}>login</button>}
+        {isAuth && (
+          <>
+            <button onClick={handleLogOut}>logout</button>
+          </>
+        )}
       </div>
       <main>
         <Outlet />

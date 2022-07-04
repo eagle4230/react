@@ -5,11 +5,11 @@ import { Button } from './components/Button';
 import { Input } from './components/Input';
 import { useEffect } from 'react';
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { addMessage } from 'src/store/messages/slice';
 import { useParams } from 'react-router-dom';
-import { AUTHOR } from 'src/data';
-import { addMessageWithReply } from '../../store/messages/slice';
+import { AUTHOR } from '../../data';
+import { push } from 'firebase/database';
+import { getMessageListById } from '../../services/firebase';
 
 export const Form = memo(() => {
   const [text, setText] = useState('');
@@ -22,18 +22,22 @@ export const Form = memo(() => {
     }
   }, [inputRef]);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { chatId } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (chatId) {
-      dispatch(
-        addMessageWithReply({
-          chatName: chatId,
-          message: { author: AUTHOR.user, text },
-        })
-      );
+      // dispatch(
+      //   addMessageWithReply({
+      //     chatName: chatId,
+      //     message: { author: AUTHOR.user, text },
+      //   })
+      // );
+      push(getMessageListById(chatId), {
+        text,
+        author: AUTHOR.user,
+      });
     }
 
     setText('');
